@@ -1,0 +1,25 @@
+{
+  "name": "restserver-node",
+  "version": "1.0.0",
+  "description": "Creando endpoints con NodeJS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DramaQueeen26/restserver-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DramaQueeen26/restserver-node/issues"
+  },
+  "homepage": "https://github.com/DramaQueeen26/restserver-node#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  }
+}
