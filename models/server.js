@@ -12,6 +12,7 @@ class Server
 		this.middlewares();
 
 		//Rutas
+		this.usersPath = '/api/users';
 		this.routes();
 	}
 
@@ -25,33 +26,7 @@ class Server
 
 	routes()
 	{
-		this.app.get('/api', (req, res) => {
-			res.json({
-				ok: true,
-				msg: "get API"
-			});
-		});
-
-		this.app.put('/api', (req, res) => {
-			res.json({
-				ok: true,
-				msg: "put API"
-			});
-		});
-
-		this.app.post('/api', (req, res) => {
-			res.json({
-				ok: true,
-				msg: "post API"
-			});
-		});
-
-		this.app.delete('/api', (req, res) => {
-			res.json({
-				ok: true,
-				msg: "delete API"
-			});
-		});
+		this.app.use(this.usersPath, require('../routes/user'));
 	}
 
 	listen()
