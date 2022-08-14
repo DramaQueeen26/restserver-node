@@ -1,9 +1,12 @@
 const {response} = require('express');
 
 const usersGet = (req, res = response) => {
+	const {query = false, id} = req.query;
 	res.json({
 		ok: true,
-		msg: "get API - controller"
+		msg: "get API - controller",
+		query,
+		id
 	});
 }
 
@@ -18,9 +21,11 @@ const usersPost = (req, res = response) => {
 }
 
 const usersPut = (req, res = response) => {
+	const {id} = req.params;
 	res.json({
 		ok: true,
-		msg: "put API - controller"
+		msg: "put API - controller",
+		id
 	});
 }
 
