@@ -13,11 +13,20 @@ const usersGet = (req, res = response) => {
 }
 
 const usersPost = async(req, res = response) => {
+
+	
 	
 	const {name, email, password, role} = req.body;
 	const user = new User({name, email, password, role});
 
 	//Verificar si el correo existe
+	const checkEmail = await User.findOne({email});
+
+	if(checkEmail){
+		return res.status(400).json({
+			msg: "El correo ya existe"
+		});
+	}
 
 	//Encriptar la contraseña
 	const salt = bcrypt.genSaltSync();
