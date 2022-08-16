@@ -7,7 +7,7 @@ const usersGet = async(req, res = response) => {
 	/*
 		Promise.all es una colección de promesas, quiere decir que ejecuta todas las promesas a la vez, a diferencia del await, que primero ejecuta una y luego la otra.
 	*/
-	
+
 	const {limit = 5, from = 0} = req.query;
 	const query = {status: true};
 
@@ -37,7 +37,6 @@ const usersPost = async(req, res = response) => {
 	await user.save();
 
 	res.json({
-		msg: "post API - controller",
 		user
 	});
 
@@ -57,7 +56,6 @@ const usersPut = async(req, res = response) => {
 	
 	const user = await User.findByIdAndUpdate(id, rest);
 	res.json({
-		msg: "put API - controller",
 		user
 	});
 }
@@ -69,11 +67,17 @@ const usersPatch = (req, res = response) => {
 	});
 }
 
-const usersDelete = (req, res = response) => {
-	res.json({
-		ok: true,
-		msg: "delete API - controller"
-	});
+const usersDelete = async(req, res = response) => {
+	
+	const {id} = req.params;
+
+	//BORRAR FISICAMENTE - NO RECOMENDADO
+	// const user = await User.findByIdAndDelete(id);
+
+	//Cambiar el estado - RECOMENDADO
+	const user = await User.findByIdAndUpdate(id, {status: false});
+
+	res.json(user);
 }
 
 module.exports = {
