@@ -3,17 +3,24 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 const usersGet = async(req, res = response) => {
+
+	/*
+		Promise.all es una colección de promesas, quiere decir que ejecuta todas las promesas a la vez, a diferencia del await, que primero ejecuta una y luego la otra.
+	*/
 	
-	//Obtener parámetros de la URL
-	// const {query = false, id} = req.query;
-
 	const {limit = 5, from = 0} = req.query;
+	const query = {status: true};
 
-	const users = await User.find()
-		.skip(Number(from))
-		.limit(Number(limit));
+	//DESESTRUCTURACIÓN DE ARREGLOS
+	const [total, users] = await Promise.all([
+			User.countDocuments(query),
+			User.find(query)
+			.skip(Number(from))
+			.limit(Number(limit))
+		]);
 
 	res.json({
+		total,
 		users
 	});
 }
